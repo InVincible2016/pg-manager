@@ -1,0 +1,19 @@
+{
+  "name": "pg-manager",
+  "version": "1.0.0",
+  "description": "pg-manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InVincible2016/pg-manager.git"
+  },
+  "author": "Changlong Zhong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InVincible2016/pg-manager/issues"
+  },
+  "homepage": "https://github.com/InVincible2016/pg-manager#readme"
+}
