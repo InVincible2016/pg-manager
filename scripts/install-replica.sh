@@ -5,10 +5,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # read config
 source $SCRIPT_DIR/cluster-config.sh
 
-mkdir -p $DATA_PATH
 mkdir -p $ARCHIVE_PATH
 
-pg_basebackup -D $DATA_PATH --wal-method=stream -p -h $PRIMARY -p $PORT -U rep_user -W $PASSWORD
+pg_basebackup -D $DATA_PATH --wal-method=stream -h $PRIMARY -p $PORT -U rep_user
 
 sed -i -e "s|^#port.*|port=$PORT|" $PG_CONFIG
 sed -i -e 's|^#hot_standby.*|hot_standby= on|' $PG_CONFIG
