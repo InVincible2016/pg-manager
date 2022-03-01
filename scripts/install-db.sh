@@ -20,7 +20,7 @@ sed -i -e "s|^#primary_conninfo.*|primary_conninfo= 'host=$REPLICA port=$PORT db
 echo 'host    replication     rep_user        192.168.1.1/24            trust' >> $PG_HBA
 echo 'host    all             all             192.168.1.1/24            md5' >> $PG_HBA
 
-pg_ctl -D /home/clzhong/db/DATA -l logfile start
+pg_ctl -D $DATA_PATH -l logfile start
 psql -h /tmp postgres -p $PORT -c "CREATE ROLE rep_user with PASSWORD '$PASSWORD' LOGIN REPLICATION;"
 psql -h /tmp postgres -p $PORT -c "CREATE ROLE admin_user with PASSWORD '$PASSWORD' LOGIN;"
 psql -h /tmp postgres -p $PORT -c "CREATE DATABASE $DB_NAME with OWNER='admin_user';"
