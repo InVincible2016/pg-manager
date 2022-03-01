@@ -4,6 +4,7 @@
   "description": "pg-manager",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/InVincible2016/pg-manager/issues"
   },
-  "homepage": "https://github.com/InVincible2016/pg-manager#readme"
+  "homepage": "https://github.com/InVincible2016/pg-manager#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }

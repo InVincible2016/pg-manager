@@ -7,7 +7,7 @@ source $SCRIPT_DIR/cluster-config.sh
 
 mkdir -p $ARCHIVE_PATH
 
-pg_basebackup -D $DATA_PATH --wal-method=stream -h $PRIMARY -p $PORT -U rep_user
+pg_basebackup -D $DATA_PATH --wal-method=stream -h $PRIMARY -p $PORT -U rep_user -P -c fast
 
 sed -i -e "s|^#port.*|port=$PORT|" $PG_CONFIG
 sed -i -e 's|^#hot_standby.*|hot_standby= on|' $PG_CONFIG
@@ -21,4 +21,4 @@ touch $DATA_PATH/standby.signal
 echo 'host    replication     rep_user        192.168.1.1/24            trust' >> $PG_HBA
 echo 'host    all             all             192.168.1.1/24            md5' >> $PG_HBA
 
-pg_ctl -D /home/clzhong/db/DATA -l logfile start
+pg_ctl -D $DATA_PATH -l logfile start
