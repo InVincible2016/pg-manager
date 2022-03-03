@@ -20,11 +20,12 @@ sed -i -e "s|^#primary_conninfo.*|primary_conninfo= 'host=$REPLICA port=$PORT db
 sed -i -e "s|^#archive_mode.*|archive_mode= on|" $PG_CONFIG
 sed -i -e "s|^#archive_command.*|archive_command= 'scp %p clzhong@$REPLICA:$ARCHIVE_PATH/%f'|" $PG_CONFIG
 sed -i -e "s|^#restore_command.*|restore_command= 'cp $ARCHIVE_PATH/%f %p'|" $PG_CONFIG
+sed -i -e "s|^#archive_cleanup_command.*|archive_cleanup_command= 'pg_archivecleanup -d $ARCHIVE_PATH %r 2>>cleanup.log'|" $PG_CONFIG
 
 sed -i -e 's|^#hot_standby.*|hot_standby= on|' $PG_CONFIG
 
 echo 'host    replication     rep_user        192.168.1.1/24            trust' >> $PG_HBA
-echo 'host    all             all             192.168.1.1/24            md5' >> $PG_HBA
+echo 'host    all             all             192.168.1.1/24            trust' >> $PG_HBA
 
 pg_ctl -D $DATA_PATH -l logfile start
 psql -h /tmp postgres -p $PORT -c "CREATE ROLE rep_user with PASSWORD '$PASSWORD' LOGIN REPLICATION;"
